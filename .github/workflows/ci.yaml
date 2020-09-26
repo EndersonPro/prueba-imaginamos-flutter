@@ -8,7 +8,6 @@ on:
 jobs:
   build_ios:
     name: Construyendo Flutter App (iOS)
-    needs: [flutter_test]
     runs-on: macos-latest
     defaults:
       run:
@@ -27,7 +26,6 @@ jobs:
 
   build_appbundle:
     name: Construyendo Flutter App (Android)
-    needs: [flutter_test]
     runs-on: ubuntu-latest
     defaults:
       run:
