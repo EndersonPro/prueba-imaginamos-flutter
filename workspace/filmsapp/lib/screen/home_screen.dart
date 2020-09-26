@@ -1,3 +1,6 @@
+import 'package:filmsapp/bloc/films_bloc.dart';
+import 'package:filmsapp/bloc/main_bloc.dart';
+import 'package:filmsapp/models/film_model.dart';
 import 'package:filmsapp/widget/header_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +13,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    // Aca por si acaso
+
+    final FilmsBloc filmsBloc = MainBloc.of(context);
+
+    filmsBloc.getPopular();
 
     return Scaffold(
       body: Container(
@@ -107,6 +113,24 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ),
+                  StreamBuilder(
+                    stream: filmsBloc.popularStream,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Film>> snapshot) {
+                      if (snapshot.hasData) {
+                        print(snapshot.data[0].title);
+                        return Container(
+                          child: Text('Peliculas'),
+                        );
+                      } else {
+                        return Container(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                    },
                   )
                 ],
               ),
@@ -115,30 +139,5 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class _HeaderCurvoPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = new Paint();
-    final path = new Path();
-
-    paint.color = Colors.lightGreen;
-    paint.style = PaintingStyle.fill;
-    paint.strokeWidth = 5;
-
-    path.lineTo(0, size.height * 1.1);
-    // path.lineTo(size.width * .04, size.height);
-    path.quadraticBezierTo(size.width * 0.04 / 1.8, size.height * 1.0025,
-        size.width * .04, size.height);
-    // path.lineTo(size.width, 0);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
   }
 }
