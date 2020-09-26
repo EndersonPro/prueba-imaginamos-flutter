@@ -1,7 +1,7 @@
 import 'package:filmsapp/bloc/films_bloc.dart';
 import 'package:filmsapp/bloc/main_bloc.dart';
 import 'package:filmsapp/models/film_model.dart';
-import 'package:filmsapp/widget/header_widget.dart';
+import 'package:filmsapp/widgets/films_pageview_cards.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
     final FilmsBloc filmsBloc = MainBloc.of(context);
 
     filmsBloc.getPopular();
+    filmsBloc.getRated();
 
     return Scaffold(
       body: Container(
@@ -114,30 +115,56 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  StreamBuilder(
-                    stream: filmsBloc.popularStream,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<Film>> snapshot) {
-                      if (snapshot.hasData) {
-                        print(snapshot.data[0].title);
-                        return Container(
-                          child: Text('Peliculas'),
-                        );
-                      } else {
-                        return Container(
-                          child: Center(
-                            child: CircularProgressIndicator(),
+                  _filmsCarrusel(stream: filmsBloc.popularStream),
+                  Padding(
+                    padding: EdgeInsets.only(left: 25, right: 25, bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'TOP RATED',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(.6),
+                            fontSize: 13.0,
                           ),
-                        );
-                      }
-                    },
-                  )
+                        ),
+                        Text(
+                          'See all',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(.3),
+                            fontSize: 13.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  _filmsCarrusel(stream: filmsBloc.ratedStream)
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _filmsCarrusel({Stream<List<Film>> stream}) {
+    return StreamBuilder(
+      stream: stream,
+      builder: (BuildContext context, AsyncSnapshot<List<Film>> snapshot) {
+        if (snapshot.hasData) {
+          print(snapshot.data[0].title);
+          return FilmsPageViewCard(
+            films: snapshot.data,
+          );
+        } else {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 }

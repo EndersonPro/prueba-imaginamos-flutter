@@ -21,6 +21,15 @@ class FilmsService {
     return response;
   }
 
+  Future<List<Film>> getRated() async {
+    final url = Uri.https(_url, '/3/movie/top_rated', {
+      'api_key': _apiKey,
+      'language': _language,
+    });
+    final response = await _manageResponse(url);
+    return response;
+  }
+
   Future<List<Film>> _manageResponse(Uri url) async {
     List<Film> films = new List();
     final resp = await http.get(url);
