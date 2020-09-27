@@ -1,21 +1,21 @@
+import 'package:filmsapp/screen/detail_film.dart';
 import 'package:filmsapp/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouterApp {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    const String homePage = '/';
-    const String feed = '/feed';
-
     switch (settings.name) {
-      case homePage:
+      case HomeScreen.homeScreen:
+        // return MaterialPageRoute(builder: (_) => DetailFilm());
         return MaterialPageRoute(builder: (_) => HomeScreen());
-      case feed:
-      // return MaterialPageRoute(builder: (_) => Feed());
+      case DetailFilm.detailFilmScreen:
+        return MaterialPageRoute(
+            builder: (_) => DetailFilm(), settings: settings);
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
             body: Center(
-              child: Text('No route defined for ${settings.name}'),
+              child: Text('No hay ruta definida para ${settings.name}'),
             ),
           ),
         );

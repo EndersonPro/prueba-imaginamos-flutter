@@ -77,4 +77,10 @@ class Film {
       return 'https://pngimage.net/wp-content/uploads/2018/06/image-not-available-png-8.png';
     return 'https://image.tmdb.org/t/p/w500/$posterPath';
   }
+
+  getBackground() {
+    if (posterPath == null)
+      return 'https://pngimage.net/wp-content/uploads/2018/06/image-not-available-png-8.png';
+    return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+  }
 }

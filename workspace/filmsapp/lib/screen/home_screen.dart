@@ -7,14 +7,13 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
 
-  static final String homePage = '/';
+  static const String homeScreen = '/';
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-
-    final FilmsBloc filmsBloc = MainBloc.of(context);
+    final FilmsBloc filmsBloc = MainBloc.of(context).filmsBloc;
 
     filmsBloc.getPopular();
     filmsBloc.getRated();
@@ -156,7 +155,6 @@ class HomeScreen extends StatelessWidget {
       stream: stream,
       builder: (BuildContext context, AsyncSnapshot<List<Film>> snapshot) {
         if (snapshot.hasData) {
-          print(snapshot.data[0].title);
           return FilmsPageViewCard(
             films: snapshot.data,
           );
