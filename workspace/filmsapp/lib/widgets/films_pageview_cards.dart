@@ -15,9 +15,7 @@ class FilmsPageViewCard extends StatelessWidget {
 
     _pageController.addListener(() {
       if (_pageController.position.pixels >=
-          _pageController.position.maxScrollExtent - 200) {
-        // siguientePagina();
-      }
+          _pageController.position.maxScrollExtent - 200) {}
     });
 
     return Container(

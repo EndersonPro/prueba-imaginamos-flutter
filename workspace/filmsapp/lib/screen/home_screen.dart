@@ -1,7 +1,9 @@
 import 'package:filmsapp/bloc/films_bloc.dart';
 import 'package:filmsapp/bloc/main_bloc.dart';
 import 'package:filmsapp/models/film_model.dart';
+import 'package:filmsapp/screen/search_screen.dart';
 import 'package:filmsapp/widgets/films_pageview_cards.dart';
+import 'package:filmsapp/widgets/search_input.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,34 +51,16 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(
                         height: 25,
                       ),
-                      Container(
-                          height: 35,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              border: Border.all(
-                                color: Colors.white.withOpacity(.2),
-                              )),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(50)),
-                            child: TextField(
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(0),
-                                border: InputBorder.none,
-                                filled: true,
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.white.withOpacity(.5),
-                                ),
-                                hintStyle: TextStyle(
-                                  color: Colors.white.withOpacity(.5),
-                                ),
-                                hintText: 'Search',
-                                fillColor: Colors.white.withOpacity(.2),
-                              ),
-                            ),
-                          ))
+                      SearchInput(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        readOnly: true,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchScreen()));
+                        },
+                      ),
                     ],
                   ),
                 ),
