@@ -18,18 +18,10 @@ Row _starAverage({@required double average, @required double size}) {
 
   var i = 0;
   for (; i < 5; i++) {
-    if (i < totalStar - 1) {
-      listStar.add(Icon(
-        Icons.star,
-        size: size,
-        color: Colors.yellowAccent.withOpacity(.8),
-      ));
-      continue;
-    }
     listStar.add(Icon(
       Icons.star,
       size: size,
-      color: Colors.yellowAccent.withOpacity(.2),
+      color: Colors.yellowAccent.withOpacity(i < totalStar - 1 ? .8 : .2),
     ));
   }
   return Row(children: listStar);
