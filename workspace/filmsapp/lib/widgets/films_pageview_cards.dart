@@ -11,21 +11,21 @@ class FilmsPageViewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-
     _pageController.addListener(() {
       if (_pageController.position.pixels >=
           _pageController.position.maxScrollExtent - 200) {}
     });
 
-    return Container(
-      height: height * 0.25,
-      child: PageView.builder(
-        pageSnapping: false,
-        controller: _pageController,
-        physics: PageScrollPhysics(),
-        itemCount: films.length,
-        itemBuilder: (BuildContext context, int i) => FilmCard(film: films[i]),
+    return Expanded(
+      child: Container(
+        child: PageView.builder(
+          pageSnapping: false,
+          controller: _pageController,
+          physics: PageScrollPhysics(),
+          itemCount: films.length,
+          itemBuilder: (BuildContext context, int i) =>
+              FilmCard(film: films[i]),
+        ),
       ),
     );
   }

@@ -26,108 +26,113 @@ class HomeScreen extends StatelessWidget {
           width: width,
           height: height,
           color: Color(0xFF5aa0d4),
-          child: Column(
-            children: [
-              Container(
-                height: height * 0.35,
-                width: width,
-                padding: EdgeInsets.only(
-                  left: width * 0.10,
-                  right: width * 0.10,
-                  top: 60,
-                ),
-                color: Color(0xFF5aa0d4),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Hello, what do you want to watch ?',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25.0,
-                          fontFamily: 'OpenSans',
+          child: SafeArea(
+            child: Column(
+              children: [
+                Container(
+                  width: width,
+                  padding: EdgeInsets.only(
+                    left: width * 0.10,
+                    right: width * 0.10,
+                    top: 60,
+                  ),
+                  margin: EdgeInsets.only(bottom: 30),
+                  color: Color(0xFF5aa0d4),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Hello, what do you want to watch ?',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontFamily: 'OpenSans',
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      SearchInput(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        readOnly: true,
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SearchScreen()));
-                        },
-                      ),
-                    ],
+                        SizedBox(
+                          height: 25,
+                        ),
+                        SearchInput(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          readOnly: true,
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchScreen()));
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                height: height * 0.65,
-                width: width,
-                decoration: BoxDecoration(
-                  color: Color(0xFF283546),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                Expanded(
+                  child: Container(
+                    // height: height * 0.65,
+                    width: width,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF283546),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 35, left: 25, right: 25, bottom: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'RECOMMENDED FOR YOU',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(.6),
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                              Text(
+                                'See all',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(.3),
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        _filmsCarrusel(stream: filmsBloc.popularStream),
+                        Padding(
+                          padding:
+                              EdgeInsets.only(left: 25, right: 25, bottom: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'TOP RATED',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(.6),
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                              Text(
+                                'See all',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(.3),
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        _filmsCarrusel(stream: filmsBloc.ratedStream)
+                      ],
+                    ),
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: 35, left: 25, right: 25, bottom: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'RECOMMENDED FOR YOU',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(.6),
-                              fontSize: 13.0,
-                            ),
-                          ),
-                          Text(
-                            'See all',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(.3),
-                              fontSize: 13.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    _filmsCarrusel(stream: filmsBloc.popularStream),
-                    Padding(
-                      padding: EdgeInsets.only(left: 25, right: 25, bottom: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'TOP RATED',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(.6),
-                              fontSize: 13.0,
-                            ),
-                          ),
-                          Text(
-                            'See all',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(.3),
-                              fontSize: 13.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    _filmsCarrusel(stream: filmsBloc.ratedStream)
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

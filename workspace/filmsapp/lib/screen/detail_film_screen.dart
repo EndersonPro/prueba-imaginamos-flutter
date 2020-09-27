@@ -5,6 +5,7 @@ import 'package:filmsapp/models/actor_model.dart';
 import 'package:filmsapp/models/film_detail_model.dart';
 import 'package:filmsapp/models/film_model.dart';
 import 'package:filmsapp/widgets/actors_pageview_card.dart';
+import 'package:filmsapp/widgets/star_average.dart';
 import 'package:flutter/material.dart';
 import 'arguments/detail_film_arg.dart';
 
@@ -33,40 +34,68 @@ class DetailFilm extends StatelessWidget {
         color: Color(0xFF283546),
         child: Column(
           children: [
-            Container(
-              height: size.height * 0.3,
-              width: size.width,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
+            Stack(
+              children: [
+                Container(
+                  height: size.height * 0.4,
+                  width: size.width,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+                    child: StreamBuilder(
+                      stream: filmsBloc.filmDetailStream,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<FilmDetail> snapshot) {
+                        if (snapshot.hasData) {
+                          return FadeInImage(
+                            image: NetworkImage(snapshot.data.getBackground()),
+                            fit: BoxFit.cover,
+                            placeholder:
+                                AssetImage('assets/images/loader-poster.gif'),
+                          );
+                        }
+                        return Image(
+                          image: AssetImage('assets/images/loader-poster.gif'),
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+                  ),
                 ),
-                child: StreamBuilder(
-                  stream: filmsBloc.filmDetailStream,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<FilmDetail> snapshot) {
-                    if (snapshot.hasData) {
-                      return FadeInImage(
-                        image: NetworkImage(snapshot.data.getBackground()),
-                        fit: BoxFit.cover,
-                        placeholder:
-                            AssetImage('assets/images/loader-poster.gif'),
-                      );
-                    }
-                    return Image(
-                      image: AssetImage('assets/images/loader-poster.gif'),
-                      fit: BoxFit.cover,
-                    );
-                  },
-                ),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
-                ),
-              ),
+                SafeArea(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(left: 10, right: 20),
+                    width: size.width,
+                    height: 50,
+                    // color: Colors.red,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_back,
+                              color: Colors.white.withOpacity(.7)),
+                          onPressed: () => {Navigator.pop(context)},
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.favorite_border,
+                              color: Colors.white.withOpacity(.7)),
+                          onPressed: () => {},
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
             Container(
               width: size.width,
@@ -94,7 +123,7 @@ class DetailFilm extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: size.height * .04),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -120,21 +149,21 @@ class DetailFilm extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Icon(
-                        Icons.accessibility_new,
-                        color: Colors.white.withOpacity(.2),
+                      StarAverage(
+                        average: film.voteAverage,
+                        size: 20,
                       )
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: size.height * .04),
                   Text(
                     film.overview,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 6,
                     style: TextStyle(
-                        color: Colors.white.withOpacity(.2),
-                        fontSize: 15,
+                        color: Colors.white.withOpacity(.4),
+                        fontSize: size.height * .02,
                         height: 1.5),
                   ),
                 ],
@@ -172,6 +201,7 @@ class DetailFilm extends StatelessWidget {
                           'Genre',
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.5),
+                            fontSize: size.height * .02,
                             fontFamily: 'OpenSans',
                           ),
                         ),
@@ -193,6 +223,7 @@ class DetailFilm extends StatelessWidget {
                                   return Text(
                                     genre.name,
                                     style: TextStyle(
+                                      fontSize: size.height * .02,
                                       color: Colors.white.withOpacity(0.2),
                                     ),
                                   );
@@ -200,6 +231,7 @@ class DetailFilm extends StatelessWidget {
                                   '${genre.name}, ',
                                   style: TextStyle(
                                     color: Colors.white.withOpacity(0.2),
+                                    fontSize: size.height * .02,
                                   ),
                                 );
                               }).toList();
@@ -218,6 +250,7 @@ class DetailFilm extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.5),
                             fontFamily: 'OpenSans',
+                            fontSize: size.height * .02,
                           ),
                         ),
                         SizedBox(
@@ -235,6 +268,7 @@ class DetailFilm extends StatelessWidget {
                                 time.year.toString(),
                                 style: TextStyle(
                                   color: Colors.white.withOpacity(0.2),
+                                  fontSize: size.height * .02,
                                 ),
                               );
                             } else {
@@ -251,6 +285,7 @@ class DetailFilm extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.5),
                             fontFamily: 'OpenSans',
+                            fontSize: size.height * .02,
                           ),
                         ),
                         SizedBox(
@@ -266,6 +301,7 @@ class DetailFilm extends StatelessWidget {
                                 data.originalLanguage,
                                 style: TextStyle(
                                   color: Colors.white.withOpacity(0.2),
+                                  fontSize: size.height * .02,
                                 ),
                               );
                             } else {
