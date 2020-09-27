@@ -88,8 +88,8 @@ class DetailFilm extends StatelessWidget {
                               fontFamily: 'OpenSans'),
                         ),
                       ),
-                      Icon(
-                        Icons.accessibility_new,
+                      ImageIcon(
+                        AssetImage('assets/images/icons/quality.png'),
                         color: Colors.white.withOpacity(.2),
                       )
                     ],
