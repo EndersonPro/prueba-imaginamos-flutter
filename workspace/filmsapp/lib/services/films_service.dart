@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:filmsapp/models/actor_model.dart';
 import 'package:filmsapp/models/film_detail_model.dart';
-import 'package:filmsapp/models/film_search_result_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:filmsapp/models/film_model.dart';

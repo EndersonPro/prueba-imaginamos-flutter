@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:filmsapp/models/film_detail_model.dart';
 import 'package:filmsapp/models/film_model.dart';
-import 'package:filmsapp/models/film_search_result_model.dart';
 import 'package:filmsapp/services/films_service.dart';
 
 class FilmsBloc {

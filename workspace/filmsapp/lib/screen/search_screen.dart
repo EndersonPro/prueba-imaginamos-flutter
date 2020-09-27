@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:filmsapp/bloc/films_bloc.dart';
 import 'package:filmsapp/bloc/main_bloc.dart';
 import 'package:filmsapp/models/film_model.dart';
-import 'package:filmsapp/models/film_search_result_model.dart';
 import 'package:filmsapp/screen/arguments/detail_film_arg.dart';
 import 'package:filmsapp/screen/detail_film_screen.dart';
 import 'package:flutter/material.dart';
