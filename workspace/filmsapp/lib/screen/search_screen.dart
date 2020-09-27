@@ -43,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
     });
     return Scaffold(
       body: Container(
-        color: Color(0xFF283546),
+        color: Theme.of(context).primaryColor,
         child: SafeArea(
             child: Column(
           children: [

@@ -25,19 +25,20 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           width: width,
           height: height,
-          color: Color(0xFF5aa0d4),
+          color: Theme.of(context).accentColor,
           child: SafeArea(
             child: Column(
               children: [
                 Container(
                   width: width,
+                  height: height * .2,
                   padding: EdgeInsets.only(
                     left: width * 0.10,
                     right: width * 0.10,
-                    top: 60,
+                    top: height * .03,
                   ),
-                  margin: EdgeInsets.only(bottom: 30),
-                  color: Color(0xFF5aa0d4),
+                  margin: EdgeInsets.only(bottom: height * .05),
+                  color: Theme.of(context).accentColor,
                   child: Center(
                     child: Column(
                       children: [
@@ -45,12 +46,12 @@ class HomeScreen extends StatelessWidget {
                           'Hello, what do you want to watch ?',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 25.0,
+                            fontSize: height * .03,
                             fontFamily: 'OpenSans',
                           ),
                         ),
                         SizedBox(
-                          height: 25,
+                          height: height * .02,
                         ),
                         SearchInput(
                           borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -68,10 +69,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    // height: height * 0.65,
                     width: width,
                     decoration: BoxDecoration(
-                      color: Color(0xFF283546),
+                      color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
@@ -81,7 +81,11 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              top: 35, left: 25, right: 25, bottom: 10),
+                            top: height * .03,
+                            left: width * .06,
+                            right: width * .06,
+                            bottom: height * .02,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -104,8 +108,11 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _filmsCarrusel(stream: filmsBloc.popularStream),
                         Padding(
-                          padding:
-                              EdgeInsets.only(left: 25, right: 25, bottom: 10),
+                          padding: EdgeInsets.only(
+                            left: width * .06,
+                            right: width * .06,
+                            bottom: height * .02,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

@@ -31,7 +31,7 @@ class DetailFilm extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: Color(0xFF283546),
+        color: Theme.of(context).primaryColor,
         child: Column(
           children: [
             Stack(
@@ -77,7 +77,6 @@ class DetailFilm extends StatelessWidget {
                     padding: EdgeInsets.only(left: 10, right: 20),
                     width: size.width,
                     height: 50,
-                    // color: Colors.red,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -107,7 +106,6 @@ class DetailFilm extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
-                        width: size.width * 0.7,
                         child: Text(
                           film.title,
                           overflow: TextOverflow.ellipsis,
@@ -129,7 +127,7 @@ class DetailFilm extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
-                        height: 35,
+                        height: size.height * .04,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(50)),
                             border: Border.all(
@@ -151,7 +149,7 @@ class DetailFilm extends StatelessWidget {
                       ),
                       StarAverage(
                         average: film.voteAverage,
-                        size: 20,
+                        size: size.width * .05,
                       )
                     ],
                   ),
@@ -169,7 +167,7 @@ class DetailFilm extends StatelessWidget {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Color(0xFF283546),
+                color: Theme.of(context).primaryColor,
               ),
             ),
             Expanded(
@@ -187,12 +185,10 @@ class DetailFilm extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(left: 20, right: 20),
+                padding: EdgeInsets.only(
+                    left: 20, right: 20, top: size.height * 0.01),
                 child: Column(
                   children: [
                     Row(

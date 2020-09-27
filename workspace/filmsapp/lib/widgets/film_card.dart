@@ -20,7 +20,11 @@ class FilmCard extends StatelessWidget {
         );
       },
       child: Container(
+        height: size.height * .22,
+        width: size.width * .30,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
@@ -28,17 +32,18 @@ class FilmCard extends StatelessWidget {
                 image: NetworkImage(film.getPoster()),
                 placeholder: AssetImage('assets/images/no-poster.jpg'),
                 fit: BoxFit.cover,
-                height: size.height * .25,
+                height: size.height * .22,
                 width: size.width * .30,
               ),
             ),
-            SizedBox(height: 5.0),
+            SizedBox(height: size.height * .002),
             Text(
               film.title,
               overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.left,
               style: TextStyle(color: Colors.white60, fontSize: 12),
             ),
-            StarAverage(average: film.voteAverage, size: 20)
+            StarAverage(average: film.voteAverage, size: 12)
           ],
         ),
       ),
