@@ -10,9 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainBloc(
       child: MaterialApp(
-        title: 'Material App',
+        title: 'Films App - IMAGINAMOS',
+        debugShowCheckedModeBanner: false,
+        // debugShowMaterialGrid: true,
         onGenerateRoute: RouterApp.generateRoute,
-        initialRoute: HomeScreen.homePage,
+        initialRoute: HomeScreen.homeScreen,
       ),
     );
   }

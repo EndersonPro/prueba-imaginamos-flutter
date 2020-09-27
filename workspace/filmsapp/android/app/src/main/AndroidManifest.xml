@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.filmsapp">
+    package="pro.enderson.filmsapp">
    <application
         android:label="filmsapp"
         android:icon="@mipmap/ic_launcher">

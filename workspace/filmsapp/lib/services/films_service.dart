@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:filmsapp/models/actor_model.dart';
+import 'package:filmsapp/models/film_detail_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:filmsapp/models/film_model.dart';
@@ -30,11 +32,51 @@ class FilmsService {
     return response;
   }
 
+  Future<FilmDetail> getFilmDetail(String id) async {
+    final url = Uri.https(_url, '/3/movie/$id', {
+      'api_key': _apiKey,
+      'language': _language,
+    });
+    final resp = await http.get(url);
+    final decodeData = json.decode(resp.body);
+    final filmDetail = new FilmDetail.fromJson(decodeData);
+    print(filmDetail);
+    return filmDetail;
+  }
+
+  Future<List<Film>> buscarPelicula(String query) async {
+    List<Film> films = new List();
+    final url = Uri.https(_url, '3/search/movie',
+        {'api_key': _apiKey, 'language': _language, 'query': query});
+    final resp = await http.get(url);
+    final decodeData = json.decode(resp.body);
+    if (decodeData['results'] == null) return films;
+    for (var item in decodeData['results']) {
+      // print(item['release_date']);
+      final film = new Film.fromJson(item);
+      films.add(film);
+    }
+    return films;
+  }
+
+  Future<List<Actor>> getCast(String id) async {
+    final uri = Uri.https(_url, '3/movie/$id/credits',
+        {'api_key': _apiKey, 'language': _language});
+    final resp = await http.get(uri);
+    final decodeData = json.decode(resp.body);
+    List<Actor> listActors = new List<Actor>();
+    for (var item in decodeData['cast']) {
+      final actor = new Actor.fromJson(item);
+      listActors.add(actor);
+    }
+    return listActors;
+  }
+
   Future<List<Film>> _manageResponse(Uri url) async {
     List<Film> films = new List();
     final resp = await http.get(url);
     final decodeData = json.decode(resp.body);
-    if (decodeData['results'] == null) [];
+    if (decodeData['results'] == null) return films;
     for (var item in decodeData['results']) {
       final film = new Film.fromJson(item);
       films.add(film);
