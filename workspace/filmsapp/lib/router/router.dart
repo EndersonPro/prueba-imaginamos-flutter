@@ -1,6 +1,7 @@
-import 'package:filmsapp/screen/detail_film.dart';
-import 'package:filmsapp/screen/home_screen.dart';
+import 'package:filmsapp/screen/search_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:filmsapp/screen/detail_film_screen.dart';
+import 'package:filmsapp/screen/home_screen.dart';
 
 class RouterApp {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -11,6 +12,9 @@ class RouterApp {
       case DetailFilm.detailFilmScreen:
         return MaterialPageRoute(
             builder: (_) => DetailFilm(), settings: settings);
+      case SearchScreen.searchScreen:
+        return MaterialPageRoute(
+            builder: (_) => SearchScreen(), settings: settings);
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

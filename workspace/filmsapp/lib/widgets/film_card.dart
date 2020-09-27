@@ -1,6 +1,6 @@
 import 'package:filmsapp/models/film_model.dart';
+import 'package:filmsapp/screen/detail_film_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:filmsapp/screen/detail_film.dart';
 import 'package:filmsapp/screen/arguments/detail_film_arg.dart';
 
 class FilmCard extends StatelessWidget {
@@ -27,6 +27,7 @@ class FilmCard extends StatelessWidget {
                 placeholder: AssetImage('assets/images/no-poster.jpg'),
                 fit: BoxFit.cover,
                 height: 140.0,
+                width: 100.0,
               ),
             ),
             SizedBox(height: 5.0),

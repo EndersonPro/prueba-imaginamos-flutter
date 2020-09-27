@@ -35,7 +35,7 @@ class Film {
   String title;
   double voteAverage;
   String overview;
-  DateTime releaseDate;
+  dynamic releaseDate;
 
   factory Film.fromJson(Map<String, dynamic> json) => Film(
         popularity: json["popularity"].toDouble(),
@@ -51,7 +51,9 @@ class Film {
         title: json["title"],
         voteAverage: json["vote_average"].toDouble(),
         overview: json["overview"],
-        releaseDate: DateTime.parse(json["release_date"]),
+        releaseDate: json["release_date"] != null
+            ? DateTime.parse(json["release_date"])
+            : DateTime.now(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -79,7 +81,7 @@ class Film {
   }
 
   getBackground() {
-    if (posterPath == null)
+    if (backdropPath == null)
       return 'https://pngimage.net/wp-content/uploads/2018/06/image-not-available-png-8.png';
     return 'https://image.tmdb.org/t/p/w500/$backdropPath';
   }

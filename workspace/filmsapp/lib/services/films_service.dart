@@ -44,6 +44,21 @@ class FilmsService {
     return filmDetail;
   }
 
+  Future<List<Film>> buscarPelicula(String query) async {
+    List<Film> films = new List();
+    final url = Uri.https(_url, '3/search/movie',
+        {'api_key': _apiKey, 'language': _language, 'query': query});
+    final resp = await http.get(url);
+    final decodeData = json.decode(resp.body);
+    if (decodeData['results'] == null) return films;
+    for (var item in decodeData['results']) {
+      // print(item['release_date']);
+      final film = new Film.fromJson(item);
+      films.add(film);
+    }
+    return films;
+  }
+
   Future<List<Actor>> getCast(String id) async {
     final uri = Uri.https(_url, '3/movie/$id/credits',
         {'api_key': _apiKey, 'language': _language});
@@ -61,7 +76,7 @@ class FilmsService {
     List<Film> films = new List();
     final resp = await http.get(url);
     final decodeData = json.decode(resp.body);
-    if (decodeData['results'] == null) [];
+    if (decodeData['results'] == null) return films;
     for (var item in decodeData['results']) {
       final film = new Film.fromJson(item);
       films.add(film);
