@@ -1,4 +1,4 @@
-package com.example.filmsapp
+package pro.enderson.filmsapp
 
 import io.flutter.embedding.android.FlutterActivity
 
