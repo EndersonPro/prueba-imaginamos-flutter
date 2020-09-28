@@ -20,25 +20,26 @@ class SearchInput extends StatelessWidget {
           )),
       child: ClipRRect(
         borderRadius: this.borderRadius,
-        child: TextField(
-          enableInteractiveSelection: false,
-          readOnly: this.readOnly,
-          onTap: onTap,
-          textAlign: TextAlign.start,
-          style: TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(0),
-            border: InputBorder.none,
-            filled: true,
-            prefixIcon: Icon(
-              Icons.search,
-              color: Colors.white.withOpacity(.5),
+        child: Center(
+          child: TextField(
+            enableInteractiveSelection: false,
+            readOnly: this.readOnly,
+            onTap: onTap,
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.all(0),
+              border: InputBorder.none,
+              filled: true,
+              prefixIcon: Icon(
+                Icons.search,
+                color: Colors.white.withOpacity(.5),
+              ),
+              labelStyle: TextStyle(
+                color: Colors.white.withOpacity(.5),
+              ),
+              labelText: 'Search',
+              fillColor: Colors.white.withOpacity(.2),
             ),
-            hintStyle: TextStyle(
-              color: Colors.white.withOpacity(.5),
-            ),
-            hintText: 'Search',
-            fillColor: Colors.white.withOpacity(.2),
           ),
         ),
       ),
