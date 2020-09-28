@@ -7,19 +7,20 @@ class ActorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         children: [
           Container(
-            height: 60,
-            width: 60,
+            height: size.height * .1,
+            width: size.height * .1,
             decoration: BoxDecoration(shape: BoxShape.circle),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100.0),
               child: FadeInImage(
                 image: NetworkImage(actor.getProfileImg()),
                 fit: BoxFit.cover,
-                height: 70.0,
+                height: size.height * .1,
                 placeholder: AssetImage('assets/images/no-poster.jpg'),
               ),
             ),
@@ -28,9 +29,9 @@ class ActorCard extends StatelessWidget {
             actor.name,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.white.withOpacity(.5),
-            ),
-            overflow: TextOverflow.clip,
+                color: Colors.white.withOpacity(.5),
+                fontSize: size.height * .02),
+            overflow: TextOverflow.ellipsis,
           )
         ],
       ),
