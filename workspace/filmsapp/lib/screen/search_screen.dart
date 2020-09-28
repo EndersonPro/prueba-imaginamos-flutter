@@ -189,7 +189,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(
-                                Icons.search_rounded,
+                                Icons.search,
                                 size: size.height * 0.1,
                                 color: Colors.white.withOpacity(.5),
                               ),
