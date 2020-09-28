@@ -12,9 +12,19 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Films',
         debugShowCheckedModeBanner: false,
-        // debugShowMaterialGrid: true,
         onGenerateRoute: RouterApp.generateRoute,
         initialRoute: HomeScreen.homeScreen,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          accentColor: Color(0xFF5aa0d4),
+          primaryColor: Color(0xFF283546),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Color(0xFF1a1e23),
+          accentColor: Color(0xFF0c2f47),
+        ),
       ),
     );
   }

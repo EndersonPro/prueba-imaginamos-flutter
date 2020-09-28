@@ -10,8 +10,9 @@ class SearchInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      height: 35,
+      height: size.height * .055,
       decoration: BoxDecoration(
           borderRadius: this.borderRadius,
           border: Border.all(
@@ -23,6 +24,7 @@ class SearchInput extends StatelessWidget {
           enableInteractiveSelection: false,
           readOnly: this.readOnly,
           onTap: onTap,
+          textAlign: TextAlign.start,
           style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(0),
