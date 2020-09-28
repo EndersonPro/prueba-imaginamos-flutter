@@ -27,8 +27,16 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  void dispose() {
+    _searchQuery.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final FilmsBloc filmsBloc = MainBloc.of(context).filmsBloc;
+
+    final size = MediaQuery.of(context).size;
 
     _searchQuery.addListener(() {
       if (debounceTimer != null) {
@@ -48,24 +56,30 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
           children: [
             Container(
-              height: 35,
+              // height: 100,
               child: TextField(
                 autofocus: true,
                 controller: _searchQuery,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(0),
-                  border: InputBorder.none,
+                  hintText: 'Search',
+                  hintStyle: TextStyle(color: Colors.white.withOpacity(.5)),
                   filled: true,
                   prefixIcon: Icon(
                     Icons.search,
                     color: Colors.white.withOpacity(.5),
                   ),
-                  hintStyle: TextStyle(
-                    color: Colors.white.withOpacity(.5),
-                  ),
-                  hintText: 'Search',
                   fillColor: Colors.white.withOpacity(.2),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                    borderSide: BorderSide(
+                        color: Colors.white.withOpacity(0), width: 0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    borderSide: BorderSide(
+                        color: Colors.white.withOpacity(0), width: 0),
+                  ),
                 ),
               ),
             ),
@@ -94,9 +108,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    height: 80,
+                                    height: 120,
                                     width: 80,
+                                    margin: EdgeInsets.only(right: 10),
                                     child: FadeInImage(
+                                      fit: BoxFit.cover,
                                       image: NetworkImage(
                                           films[index].getPoster()),
                                       placeholder: AssetImage(
@@ -119,7 +135,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                           style: TextStyle(
                                               color:
                                                   Colors.white.withOpacity(.8),
-                                              fontSize: 13.0,
+                                              fontSize: 20.0,
                                               fontFamily: 'OpenSans'),
                                         ),
                                         Text(
@@ -138,7 +154,59 @@ class _SearchScreenState extends State<SearchScreen> {
                       },
                     );
                   }
-                  return Container();
+                  return StreamBuilder(
+                    stream: filmsBloc.isSearchingFilmStream,
+                    builder:
+                        (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                      if (snapshot.hasData) {
+                        return Container(
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image(
+                                  image: AssetImage(
+                                      'assets/images/loader-movie.gif'),
+                                ),
+                                Text(
+                                  'Looking for movie...',
+                                  style: TextStyle(
+                                    fontSize: size.height * 0.02,
+                                    fontFamily: 'OpenSans',
+                                    color: Colors.white.withOpacity(.5),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      return Container(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.search_rounded,
+                                size: size.height * 0.1,
+                                color: Colors.white.withOpacity(.5),
+                              ),
+                              Text(
+                                'Find your favorite movie',
+                                style: TextStyle(
+                                  fontSize: size.height * 0.02,
+                                  fontFamily: 'OpenSans',
+                                  color: Colors.white.withOpacity(.5),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
               ),
             )

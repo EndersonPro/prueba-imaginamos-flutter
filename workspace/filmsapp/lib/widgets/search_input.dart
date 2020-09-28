@@ -12,7 +12,8 @@ class SearchInput extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * .055,
+      height: size.height * .05,
+      width: size.width,
       decoration: BoxDecoration(
           borderRadius: this.borderRadius,
           border: Border.all(
@@ -20,26 +21,32 @@ class SearchInput extends StatelessWidget {
           )),
       child: ClipRRect(
         borderRadius: this.borderRadius,
-        child: Center(
-          child: TextField(
-            enableInteractiveSelection: false,
-            readOnly: this.readOnly,
-            onTap: onTap,
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(0),
-              border: InputBorder.none,
-              filled: true,
-              prefixIcon: Icon(
-                Icons.search,
-                color: Colors.white.withOpacity(.5),
-              ),
-              labelStyle: TextStyle(
-                color: Colors.white.withOpacity(.5),
-              ),
-              labelText: 'Search',
-              fillColor: Colors.white.withOpacity(.2),
+        child: TextField(
+          autocorrect: true,
+          readOnly: this.readOnly,
+          onTap: onTap,
+          style: TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: 'Search',
+            hintStyle: TextStyle(color: Colors.white.withOpacity(.5)),
+            filled: true,
+            isDense: true,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: this.borderRadius,
+              borderSide:
+                  BorderSide(color: Colors.white.withOpacity(0), width: 0),
             ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: this.borderRadius,
+              borderSide:
+                  BorderSide(color: Colors.white.withOpacity(0), width: 0),
+            ),
+            border: InputBorder.none,
+            prefixIcon: Icon(
+              Icons.search,
+              color: Colors.white.withOpacity(.5),
+            ),
+            fillColor: Colors.white.withOpacity(.2),
           ),
         ),
       ),

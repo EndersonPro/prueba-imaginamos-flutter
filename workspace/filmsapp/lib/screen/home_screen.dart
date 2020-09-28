@@ -57,10 +57,8 @@ class HomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(50)),
                           readOnly: true,
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchScreen()));
+                            Navigator.pushNamed(
+                                context, SearchScreen.searchScreen);
                           },
                         ),
                       ],
