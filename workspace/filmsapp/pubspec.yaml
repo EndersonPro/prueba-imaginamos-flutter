@@ -49,6 +49,7 @@ flutter:
   assets:
     - assets/images/no-poster.jpg
     - assets/images/loader-poster.gif
+    - assets/images/loader-movie.gif
     - assets/images/icons/quality.png
 
 
